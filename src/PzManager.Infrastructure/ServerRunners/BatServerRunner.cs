@@ -62,13 +62,25 @@ public sealed class BatServerRunner : IServerRunner, IServerLogs
         psi.ArgumentList.Add("/c");
         psi.ArgumentList.Add($"\"{_options.ScriptPath}\" >> \"{_options.LogFile}\" 2>&1");
 
-        var process = System.Diagnostics.Process.Start(psi);
-        if (process is null)
+        try
         {
-            throw new AppException(AppErrorCodes.InternalError, "failed to start bat script");
+            var process = System.Diagnostics.Process.Start(psi);
+            if (process is null)
+            {
+                throw new AppException(AppErrorCodes.InternalError, "failed to start bat script");
+            }
+
+            File.WriteAllText(_options.PidFile, process.Id.ToString());
+        }
+        catch (AppException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new AppException(AppErrorCodes.InternalError, "failed to start bat script", ex.Message);
         }
 
-        File.WriteAllText(_options.PidFile, process.Id.ToString());
         return Task.CompletedTask;
     }
 

@@ -18,6 +18,11 @@ public sealed class ServerRunnersTests
     [Fact]
     public async Task BatServerRunner_Start_OnNonWindows_Throws()
     {
+        if (OperatingSystem.IsWindows())
+        {
+            return;
+        }
+
         var runner = new BatServerRunner(new BatServerRunnerOptions("C:/pz/StartServer.bat", "data/pz-server.pid", "data/pz-server.log"));
         var ex = await Assert.ThrowsAsync<AppException>(() => runner.StartAsync(CancellationToken.None));
         Assert.Equal(AppErrorCodes.InternalError, ex.Code);
@@ -26,6 +31,11 @@ public sealed class ServerRunnersTests
     [Fact]
     public async Task BatServerRunner_Status_OnNonWindows_ReturnsUnknown()
     {
+        if (OperatingSystem.IsWindows())
+        {
+            return;
+        }
+
         var runner = new BatServerRunner(new BatServerRunnerOptions("C:/pz/StartServer.bat", "data/pz-server.pid", "data/pz-server.log"));
         var status = await runner.GetStatusAsync(CancellationToken.None);
         Assert.Equal("Unknown", status.State.ToString());
@@ -56,6 +66,11 @@ public sealed class ServerRunnersTests
     [Fact]
     public async Task BatServerRunner_Tail_OnNonWindows_Throws()
     {
+        if (OperatingSystem.IsWindows())
+        {
+            return;
+        }
+
         var runner = new BatServerRunner(new BatServerRunnerOptions("C:/pz/StartServer.bat", "data/pz-server.pid", "data/pz-server.log"));
         var ex = await Assert.ThrowsAsync<AppException>(() => runner.TailAsync(10, CancellationToken.None));
         Assert.Equal(AppErrorCodes.InternalError, ex.Code);
@@ -64,6 +79,11 @@ public sealed class ServerRunnersTests
     [Fact]
     public async Task BatServerRunner_Follow_OnNonWindows_Throws()
     {
+        if (OperatingSystem.IsWindows())
+        {
+            return;
+        }
+
         var runner = new BatServerRunner(new BatServerRunnerOptions("C:/pz/StartServer.bat", "data/pz-server.pid", "data/pz-server.log"));
         var ex = await Assert.ThrowsAsync<AppException>(async () =>
         {
