@@ -67,6 +67,7 @@ jobs:
         with:
           tag_name: v${{ steps.ver.outputs.version }}
           name: v${{ steps.ver.outputs.version }}
+          prerelease: ${{ contains(steps.ver.outputs.version, '-preview') }}
           generate_release_notes: true
           files: |
             pz-suite-linux-x64.zip
