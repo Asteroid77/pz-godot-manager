@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c8h2a0x3c5k1k"]
+
+[ext_resource type="Script" uid="uid://dl0e633dgn6oh" path="res://scripts/AppShell.cs" id="1_7v7rx"]
+
+[node name="AppShell" type="Control" unique_id=1708203684]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 309.0
+offset_top = 76.0
+offset_right = 309.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7v7rx")

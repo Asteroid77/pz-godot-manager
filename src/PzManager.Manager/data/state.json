@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "devices": [
+    {
+      "id": "fdfe29f36fb96c820491abc70f2177a7",
+      "publicKey": "mb5XGwxmsMjnngOvUENYJO8laCVPECM\u002BOjxaNVAO8/s=",
+      "role": "Admin",
+      "name": "Linux-0583f10b899e4628b7bbc583ef52d840",
+      "note": null,
+      "revoked": false,
+      "createdAtUtc": "2026-02-09T06:42:35.6496672+00:00",
+      "lastSeenUtc": "2026-02-09T06:42:35.6496672+00:00"
+    }
+  ],
+  "pairings": [
+    {
+      "code": "04EEC65F151B184D",
+      "role": "Admin",
+      "createdAtUtc": "2026-02-09T05:33:55.3965441+00:00",
+      "expiresAtUtc": "2026-02-09T06:03:55.3965441+00:00",
+      "consumedAtUtc": null
+    },
+    {
+      "code": "A20CC2BA9BB51FC1",
+      "role": "Admin",
+      "createdAtUtc": "2026-02-09T06:42:23.8739867+00:00",
+      "expiresAtUtc": "2026-02-09T07:12:23.8739867+00:00",
+      "consumedAtUtc": "2026-02-09T06:42:35.6496672+00:00"
+    }
+  ]
+}

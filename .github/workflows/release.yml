@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version
+        id: ver
+        run: |
+          VERSION="$(cat VERSION | tr -d '\n' | tr -d '\r')"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check tag exists
+        id: tag
+        run: |
+          TAG="v${{ steps.ver.outputs.version }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup .NET
+        if: steps.tag.outputs.exists != 'true'
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Publish (linux-x64)
+        if: steps.tag.outputs.exists != 'true'
+        run: |
+          dotnet publish ./src/PzManager.Manager/PzManager.Manager.csproj -c Release -r linux-x64 --self-contained false -o out/linux-x64/manager
+          dotnet publish ./src/PzManager.Client.Cli/PzManager.Client.Cli.csproj -c Release -r linux-x64 --self-contained false -o out/linux-x64/client-cli
+
+      - name: Publish (win-x64)
+        if: steps.tag.outputs.exists != 'true'
+        run: |
+          dotnet publish ./src/PzManager.Manager/PzManager.Manager.csproj -c Release -r win-x64 --self-contained false -o out/win-x64/manager
+          dotnet publish ./src/PzManager.Client.Cli/PzManager.Client.Cli.csproj -c Release -r win-x64 --self-contained false -o out/win-x64/client-cli
+
+      - name: Package artifacts
+        if: steps.tag.outputs.exists != 'true'
+        run: |
+          cd out
+          zip -r "../pz-suite-linux-x64.zip" "linux-x64"
+          zip -r "../pz-suite-win-x64.zip" "win-x64"
+
+      - name: Create GitHub Release
+        if: steps.tag.outputs.exists != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.ver.outputs.version }}
+          name: v${{ steps.ver.outputs.version }}
+          generate_release_notes: true
+          files: |
+            pz-suite-linux-x64.zip
+            pz-suite-win-x64.zip

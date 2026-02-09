@@ -1,0 +1,20 @@
+# .NET
+**/bin/
+**/obj/
+
+# Acceptance reports (generated)
+/acceptance/reports/
+
+# Release outputs
+/out/
+*.zip
+
+# Runtime state
+/data/
+/data-client/
+/demo-data/infra-*/
+/godot/.godot/
+
+# Editor
+.idea/
+.vscode/

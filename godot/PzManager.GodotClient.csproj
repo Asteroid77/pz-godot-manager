@@ -1,0 +1,13 @@
+<Project Sdk="Godot.NET.Sdk/4.6.0">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>PzManager</RootNamespace>
+    <AssemblyName>PzManager</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../src/PzManager.Client/PzManager.Client.csproj" />
+  </ItemGroup>
+</Project>

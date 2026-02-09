@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../PzManager.Application/PzManager.Application.csproj" />
+    <ProjectReference Include="../PzManager.Infrastructure/PzManager.Infrastructure.csproj" />
+    <ProjectReference Include="../PzManager.Transport/PzManager.Transport.csproj" />
+  </ItemGroup>
+</Project>

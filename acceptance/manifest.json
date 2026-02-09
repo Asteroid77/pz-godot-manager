@@ -1,0 +1,44 @@
+{
+  "milestone": "M0",
+  "checks": [
+    {
+      "id": "m0_plan_exists",
+      "type": "file_exists",
+      "path": "plan.md"
+    },
+    {
+      "id": "m0_version_exists",
+      "type": "file_exists",
+      "path": "VERSION"
+    },
+    {
+      "id": "m0_ci_workflow_exists",
+      "type": "file_exists",
+      "path": ".github/workflows/ci.yml"
+    },
+    {
+      "id": "m0_release_workflow_exists",
+      "type": "file_exists",
+      "path": ".github/workflows/release.yml"
+    },
+    {
+      "id": "m0_local_hook_exists",
+      "type": "file_exists",
+      "path": ".githooks/pre-push"
+    },
+    {
+      "id": "m0_ddd_projects_exist",
+      "type": "paths_exist",
+      "paths": [
+        "src/PzManager.Domain/PzManager.Domain.csproj",
+        "src/PzManager.Application/PzManager.Application.csproj",
+        "src/PzManager.Infrastructure/PzManager.Infrastructure.csproj",
+        "src/PzManager.Transport/PzManager.Transport.csproj",
+        "src/PzManager.Manager/PzManager.Manager.csproj",
+        "src/PzManager.Client/PzManager.Client.csproj",
+        "src/PzManager.Client.Cli/PzManager.Client.Cli.csproj",
+        "tests/PzManager.Domain.Tests/PzManager.Domain.Tests.csproj"
+      ]
+    }
+  ]
+}
